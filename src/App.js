@@ -1,4 +1,4 @@
-import { useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import "./App.css";
 import Form from "./components/Form";
 const initialActivities = [
@@ -21,7 +21,8 @@ const initialActivities = [
 
 function App() {
 
-  const [activities, setActivities] = useState(initialActivities);
+  const [activities, setActivities] = useLocalStorageState("activities", {
+    defaultValue: [],});
 
   console.log(activities);
 
