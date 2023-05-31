@@ -1,44 +1,33 @@
 import useLocalStorageState from "use-local-storage-state";
 import "./App.css";
 import Form from "./components/Form";
-const initialActivities = [
-  {
-    id: "28djdh72",
-    activity: "Jogging",
-    isGoodWeather: true,
-  },
-  {
-    id: "dknseu2",
-    activity: "Reading",
-    isGoodWeather: false,
-  },
-  {
-    id: "dkwi02ksk",
-    activity: "Rowing",
-    isGoodWeather: true,
-  },
-];
+import List from "./components/List";
 
+const isGoodWeather = true;
 function App() {
+  const [activities, setActivities, { isPersistent }] = useLocalStorageState(
+    "activities",
+    []
+  );
 
-  const [activities, setActivities] = useLocalStorageState("activities", {
-    defaultValue: [],});
-
-  console.log(activities);
+  console.log("form activities", activities);
 
   function handleAddActivity(newActivity) {
-    setActivities([...activities, { ...newActivity}]);
-
+    setActivities([...activities, { ...newActivity }]);
   }
+
+  const filteredActivities = activities.filter(
+    (activity) => activity.isGoodWeather === isGoodWeather
+  );
+  console.log("filtered", filteredActivities);
 
   return (
     <div>
       <header>
         <h1>All Weather Activities App</h1>
       </header>
-      <ul>
-        {activities.map((activity) =>(<li key={activity.id}>{activity.activity}</li>))}
-      </ul>
+      <List activities={filteredActivities} isGoodWeather={isGoodWeather} />
+      {!isPersistent && <span>Changes aren't currently persisted.</span>}
       <Form onAddActivity={handleAddActivity} />
     </div>
   );
