@@ -3,11 +3,22 @@ import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
 
+const initialActivities = [
+  { activity: "Hiking", isGoodWeather: true },
+  { activity: "Swimming", isGoodWeather: true },
+  { activity: "Picnic", isGoodWeather: true },
+  { activity: "Cycling", isGoodWeather: false },
+  { activity: "Indoor Gaming", isGoodWeather: false },
+  { activity: "Barbecue", isGoodWeather: true },
+];
+
 const isGoodWeather = true;
 function App() {
   const [activities, setActivities, { isPersistent }] = useLocalStorageState(
     "activities",
-    []
+    {
+      defaultValue: [],
+    }
   );
 
   console.log("form activities", activities);
