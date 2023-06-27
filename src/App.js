@@ -1,8 +1,9 @@
 import useLocalStorageState from "use-local-storage-state";
+import { useEffect } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
-import { useEffect } from "react";
+import { StyledHeader } from "./components/Header";
 
 function App() {
   const [weather, setWeather] = useLocalStorageState("weather", {
@@ -38,9 +39,9 @@ function App() {
 
   return (
     <div>
-      <header>
+      <StyledHeader>
         <h1>All Weather Activities App</h1>
-      </header>
+      </StyledHeader>
 
       <h2>{`Location: ${weather.location}`}</h2>
       <h2>{`Temp ${weather.temperature} Condition ${weather.condition}`}</h2>
