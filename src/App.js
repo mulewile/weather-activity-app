@@ -4,6 +4,8 @@ import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
 import { StyledHeader } from "./components/Header";
+import { StyledWeatherBar } from "./components/WeatherBar";
+import { StyledCondition } from "./components/Condition";
 
 function App() {
   const [weather, setWeather] = useLocalStorageState("weather", {
@@ -40,17 +42,21 @@ function App() {
   return (
     <div>
       <StyledHeader>
-        <h1>All Weather Activities App</h1>
+        <h1>All Weather Activities</h1>
       </StyledHeader>
+      <StyledWeatherBar>
+        <p>
+          LOCATION <span>{weather.location}</span> Temp
+          <span>{weather.temperature} °C</span> Condition {weather.condition}
+        </p>
+      </StyledWeatherBar>
 
-      <h2>{`Location: ${weather.location}`}</h2>
-      <h2>{`Temp ${weather.temperature} Condition ${weather.condition}`}</h2>
-      <h3>
+      <StyledCondition>
         {weather.isGoodWeather
           ? "Good Weather Outside."
           : "Bad Weather Outside."}
         You can do the following
-      </h3>
+      </StyledCondition>
       <List
         activities={filteredActivities}
         isGoodWeather={weather.isGoodWeather}
