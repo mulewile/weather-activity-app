@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
+import Button from "../Button";
 
 const StyledList = styled.ul`
   max-width: 365px;
@@ -14,12 +15,15 @@ const StyledListItem = styled.li`
   padding: 0.5rem;
 `;
 
-export default function List({ activities }) {
+export default function List({ activities, onDeleteActivity }) {
   return (
     <>
       <StyledList>
         {activities.map((activity) => (
-          <StyledListItem key={uuidv4()}>{activity.activity}</StyledListItem>
+          <StyledListItem key={uuidv4()}>
+            {activity.activity}
+            <Button text="X" onClick={() => onDeleteActivity(activity.id)} />
+          </StyledListItem>
         ))}
       </StyledList>
     </>

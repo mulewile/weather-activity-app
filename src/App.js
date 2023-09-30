@@ -34,6 +34,12 @@ function App() {
   function handleAddActivity(newActivity) {
     setActivities([...activities, { ...newActivity }]);
   }
+  function handleDeleteActivity(id) {
+    const updatedActivities = activities.filter(
+      (activity) => activity.id !== id
+    );
+    setActivities(updatedActivities);
+  }
 
   const filteredActivities = activities.filter(
     (activity) => activity.isGoodWeather === weather.isGoodWeather
@@ -60,6 +66,7 @@ function App() {
       <List
         activities={filteredActivities}
         isGoodWeather={weather.isGoodWeather}
+        onDeleteActivity={handleDeleteActivity}
       />
       {!isPersistent && <span>Changes aren't currently persisted.</span>}
       <Form onAddActivity={handleAddActivity} />
